@@ -18,7 +18,19 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
-
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["*"],       // Allows all sources for scripts, styles, etc.
+      scriptSrc: ["*"],        // Allows all scripts
+      imgSrc: ["*"],           // Allows all images
+      styleSrc: ["*"],         // Allows all styles
+      connectSrc: ["*"],       // Allows all connections (e.g., for AJAX)
+      frameSrc: ["*"],         // Allows all frames
+      // Add other directives as needed
+    },
+  },
+}));
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });

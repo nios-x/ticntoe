@@ -13,11 +13,6 @@ const boards = new Map();
 
 app.use(helmet());
 app.use(compression());
-app.use(express.static(path.join(__dirname, 'dist')));
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
@@ -31,6 +26,12 @@ app.use(helmet({
     },
   },
 }));
+app.use(express.static(path.join(__dirname, 'dist')));
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });

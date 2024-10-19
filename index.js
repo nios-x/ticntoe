@@ -13,19 +13,14 @@ const boards = new Map();
 
 app.use(helmet());
 app.use(compression());
-app.use(helmet({
-  contentSecurityPolicy: {
+app.use(
+  helmet.contentSecurityPolicy({
+    useDefaults: true,
     directives: {
-      defaultSrc: ["*"],       // Allows all sources for scripts, styles, etc.
-      scriptSrc: ["*"],        // Allows all scripts
-      imgSrc: ["*"],           // Allows all images
-      styleSrc: ["*"],         // Allows all styles
-      connectSrc: ["*"],       // Allows all connections (e.g., for AJAX)
-      frameSrc: ["*"],         // Allows all frames
-      // Add other directives as needed
-    },
-  },
-}));
+      "img-src": ["'self'", "https: data:"]
+    }
+  })
+)
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use((err, req, res, next) => {
   console.error(err.stack);

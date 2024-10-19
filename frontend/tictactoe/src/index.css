@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;    
+
+*{
+    user-select: none;
+}
+button{
+    color: white;
+    border:2px solid white;
+    border-radius: 90px;
+    user-select: none;
+}
+.customcolor{
+    background: linear-gradient(180deg, rgba(0, 0, 255, 0.348), rgba(225, 154, 255, 0.9));
+    border: 2px solid white;
+}
